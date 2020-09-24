@@ -1,17 +1,50 @@
 version: '3'
 services:
+  front:
+    container_name: front_order_service
+    build:
+      context: .
+      dockerfile: ./webapp/Dockerfile
+    ports:
+      - '8080:8080'
+    networks:
+      - app-network
+  api:
+    container_name: api_order_service
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    ports:
+      - '3000:3000'
+    networks:
+      - app-network
+  nginx:
+    image: nginx:mainline-alpine
+    container_name: nginx_order_service
+    ports:
+      - '80:80'
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+    depends_on:
+      - api
+    networks:
+      - app-network
   mongo:
-    container_name: mongo_ifood
+    container_name: mongo_order_service
     image: mongo
     ports:
       - 27017:27017
+    depends_on:
+      - api
     networks:
       - app-network
   redis:
-    container_name: redis_ifood
+    container_name: redis_order_service
     image: redis
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
+    depends_on:
+      - api
     ports:
       - '6379:6379'
     networks:

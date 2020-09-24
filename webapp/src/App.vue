@@ -178,7 +178,7 @@ export default {
 
       const { status } = await request.post('/orders', this.formOrder);
       if (status === 201) {
-        swal('Good job!', 'You clicked the button!', 'success');
+        swal('Good job!', 'Order created!', 'success');
         this.formOrder = {
           restaurant: null,
           amount: null,

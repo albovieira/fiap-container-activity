@@ -5,7 +5,9 @@ const MONGO_URL = process.env.MONGO_URL!;
 const MONGO_DATABASE = process.env.MONGO_DATABASE!;
 let database: Db;
 
-export default async function getMongoCollection(collectionName: string): Promise<Collection> {
+export default async function getMongoCollection(
+  collectionName: string,
+): Promise<Collection> {
   try {
     if (!database) {
       const client = await MongoClient.connect(MONGO_URL, {

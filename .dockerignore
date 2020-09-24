@@ -6,3 +6,8 @@
 !newrelic.js
 !tsconfig*.json
 !.npmrc
+!.env*
+!public
+!babel.config.js
+!webapp
+webapp/node_modules

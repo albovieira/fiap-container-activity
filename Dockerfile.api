@@ -1,0 +1,23 @@
+FROM albovieira/nodeapp
+
+RUN apt-get update && \
+    apt-get install -y \
+    git
+
+RUN npm install typescript -g
+RUN mkdir -p /usr/src/app
+
+COPY . /usr/src/app/
+WORKDIR /usr/src/app
+
+RUN ls -la
+RUN npm install
+
+RUN npm run build && npm prune --silent --production
+
+RUN cp .env.example .env
+
+ENV NODE_ENV production
+
+EXPOSE 3000
+CMD ["pm2-docker", "process.json"]

@@ -7,13 +7,15 @@ RUN npm install -g http-server
 WORKDIR /app
 
 # copy both 'package.json' and 'package-lock.json' (if available)
-COPY package*.json ./
+COPY ./webapp/package*.json ./
 
 # install project dependencies
 RUN npm install
 
 # copy project files and folders to the current working directory (i.e. 'app' folder)
-COPY . .
+COPY ./webapp .
+
+RUN cp .env.example .env.local
 
 # build app for production with minification
 RUN npm run build
