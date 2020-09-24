@@ -1,14 +1,14 @@
 version: '3'
 services:
   mongo:
-    container_name: mongo_startupone
+    container_name: mongo_ifood
     image: mongo
     ports:
       - 27017:27017
     networks:
       - app-network
   redis:
-    container_name: redis_startupone
+    container_name: redis_ifood
     image: redis
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
