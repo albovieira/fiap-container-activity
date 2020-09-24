@@ -1,0 +1,22 @@
+version: '3'
+services:
+  mongo:
+    container_name: mongo_startupone
+    image: mongo
+    ports:
+      - 27017:27017
+    networks:
+      - app-network
+  redis:
+    container_name: redis_startupone
+    image: redis
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - '6379:6379'
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
